@@ -5,6 +5,7 @@ import ex1
 import ex2
 import ex3
 import ex4
+import ex5
 
 
 def gerar_vetor(tamanho):
@@ -89,9 +90,8 @@ for t in tamanhos:
 
 print()
 
-
-# Tabela 2 -> Mult
-print("\nTabela de Resultados 2: Multiplicação Inteira\n")
+# Tabela 2 -> Multiplicações
+print("\nTabela de Resultados 2: Multiplicações\n")
 
 print("Algoritmo".ljust(25), end="")
 for b in bits:
@@ -100,7 +100,12 @@ print()
 
 print("-" * 85)
 
-print("Multiplicação".ljust(25), end="")
+def formatar(it, tempo):
+    return f"{it} / {tempo:.2f}"
+
+
+# Multiplicação (int)
+print("Multiplicação (int)".ljust(25), end="")
 
 for b in bits:
     x = gerar_numero(b)
@@ -114,6 +119,27 @@ for b in bits:
 
     tempo = (fim - inicio) * 1000
     it = ex4.get_iteracoes()
+
+    print(formatar(it, tempo).ljust(20), end="")
+
+print()  
+
+
+# Multiplicação (bits string)
+print("Multiplicação (bits str)".ljust(25), end="")
+
+for b in bits:
+    X = ex5.gerar_bits(b)
+    Y = ex5.gerar_bits(b)
+
+    ex5.reset_iteracoes()
+
+    inicio = time.time()
+    ex5.multiply_bits(X, Y)
+    fim = time.time()
+
+    tempo = (fim - inicio) * 1000
+    it = ex5.get_iteracoes()
 
     print(formatar(it, tempo).ljust(20), end="")
 
