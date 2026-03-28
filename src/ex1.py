@@ -1,10 +1,6 @@
 import random
 import time
-# import matplotlib.pyplot as plt
-# A bib não estáa sendo reconhecida, mesmo já tendo isntalado 
-# "pip install matplotlib.pyplot"
 
-# Variável global de iterações
 iteracoes = 0
 
 def merge_sort(L):
@@ -55,38 +51,33 @@ def merge(esquerda, direita):
     return resultado
 
 
+def reset_iteracoes():
+    global iteracoes
+    iteracoes = 0
+
+def get_iteracoes():
+    return iteracoes
+
 def gerar_vetor(tamanho):
     return [random.randint(1, 100000) for _ in range(tamanho)]
 
 
 # "Main"
-tamanhos = [32, 2048, 1048576]
-tempos =  []
+if __name__ == "__main__":
+    tamanhos = [32, 2048, 1048576]
 
-for tamanho in tamanhos:
-    vetor = gerar_vetor(tamanho)
+    for tamanho in tamanhos:
+        vetor = gerar_vetor(tamanho)
 
-    iteracoes = 0
+        reset_iteracoes()
 
-    inicio = time.time()
+        inicio = time.time()
+        vetor = merge_sort(vetor)
+        fim = time.time()
 
-    vetor = merge_sort(vetor)
+        tempo_ms = (fim - inicio) * 1000
 
-    fim = time.time()
-
-    tempo_ms = (fim - inicio) * 1000
-    tempos.append(tempo_ms) 
-
-    print(f"Tamanho: {tamanho}")
-    print(f"Iterações: {iteracoes}")
-    print(f"Tempo: {tempo_ms:.2f} ms")
-    print("---------------------------")
-
-# Gráfico 
-# plt.figure()
-# plt.plot(tamanhos, tempos, marker='o')
-# plt.xlabel("Tamanho do vetor")
-# plt.ylabel("Tempo (ms)")
-# plt.title("Merge Sort - Tempo vs Tamanho")
-# plt.xscale('log')
-# plt.show()
+        print(f"Tamanho: {tamanho}")
+        print(f"Iterações: {iteracoes}")
+        print(f"Tempo: {tempo_ms:.2f} ms")
+        print("---------------------------")
